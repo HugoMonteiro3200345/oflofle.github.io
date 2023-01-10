@@ -1,15 +1,41 @@
-function importData() {
+function importData() 
+{
+  data_elements = [];
+  
+  for (let r=0; r<tabCores.getRowCount(); r++) 
+  {
+    const ano = tabCores.getString (r, "anos");
+    const numero_alunas = tabCores.getNum (r, "numero_alunas");
+    const cor = tabCores.getString (r, "cor");
     
-  for (let r=0; r<tabCores.getRowCount(); r++) {
-    const cor  = tabCores.getString (r, "cor");
-    const tamanho = tabCores.getNum  (r, "tamanho");
-    
-    data_element = new DataElement (cor, tamanho);
+    data_elements[r] = new DataElement (ano, numero_alunas, cor);
   }
 }
 
-function drawData() {
+function drawData() 
+{
+  let espacamento = 0;
+  let portait_margin = 0;
   
-  const scalar = height/tabCores.getRowCount();
-  data_element.drawDataElement (scalar);
+  if (device_orientation === "l") espacamento = width/data_elements.length;
+  else 
+  if (device_orientation === "p") 
+  {
+    portait_margin = 200;
+    espacamento = (height-portait_margin*2)/data_elements.length;
+  }
+  
+  for (let i=0; i<data_elements.length; i++) 
+  {
+    const pos = espacamento*i + espacamento/2 + portait_margin;
+    
+    if (clicked === true) 
+    {
+      data_elements[i].animDataElement();
+    }
+    
+    data_elements[i].drawDataElement (pos);
+  }
 }
+
+

@@ -1,25 +1,38 @@
-let tabCores, data_element;
+let tabCores, data_element, clicked, device_orientation;
 
-function preload() {
-  
+function preload() 
+{
   tabCores = loadTable("tabelaDados.csv", "csv", "header");
 }
 
-
-function setup() {
-  
+function setup() 
+{
   createCanvas (windowWidth, windowHeight);
+  checkDeviceOrientation();
   importData();
+  clicked = false;
 }
 
+function checkDeviceOrientation()
+{
+  if (width>height) device_orientation = "l";
+  else 
+  if (height>width) device_orientation = "p";
+}
 
-function draw() {
-  
+function draw() 
+{
   background(240);
   drawData();
 }
 
-function windowResized() {
-  
+function mousePressed() 
+{
+  clicked = true;
+}
+
+function windowResized() 
+{
   resizeCanvas (windowWidth, windowHeight);
+  checkDeviceOrientation();
 }
