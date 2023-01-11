@@ -29,7 +29,7 @@ function drawData()
   {
     const pos = espacamento*i + espacamento/2 + portait_margin;
     
-    if (clicked === true) 
+    if (clicked === false) 
     {
       data_elements[i].animDataElement();
     }

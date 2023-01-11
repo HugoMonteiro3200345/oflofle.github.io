@@ -1,5 +1,6 @@
-let ourText = "1979 | Convenção - Eliminação de Todas as Formas de Discriminação contra as Mulheres (ONU)\n1993 | Declaração da Eliminação da Violência contra as Mulheres (ONU)\n1995 | IV Conferência Mundial sobre a Mulher - Declaração de Beijing (China)\n2000 | Resolução 1325 - Participação Feminina na Prevenção e Resolução de Conflitos (ONU)\n2015 | Objetivos de Desenvolvimento Sustentável - Igualdade de Género até 2030 (ONU)\n2017 | 3.5 a 5.5 Milhões de pessoas participam na 'Marcha das Mulheres'";
+let ourText = "🔴 1979 | Convenção - Eliminação de Todas as Formas de Discriminação contra as Mulheres (ONU)\n🟠 1993 | Declaração da Eliminação da Violência contra as Mulheres (ONU)\n🟡 1995 | IV Conferência Mundial sobre a Mulher - Declaração de Beijing (China)\n🟢 2000 | Resolução 1325 - Participação Feminina na Prevenção e Resolução de Conflitos (ONU)\n🔵 2015 | Objetivos de Desenvolvimento Sustentável - Igualdade de Género até 2030 (ONU)\n🟣 2017 | 3.5 a 5.5 Milhões de pessoas participam na 'Marcha das Mulheres'";
 
+let textL, textP;
 
 class DataElement {
   
@@ -27,28 +28,31 @@ class DataElement {
       this.margem = 150;
       
       if (device_orientation === "l") 
-      {
-        fill(0);
+      {      
+
+        textL = 564;
+        
+        noStroke();
+        fill(255);
         textSize(40);
         textAlign (CENTER, CENTER);
-        text("A História dos Direitos das Mulheres", width/2, this.margem); 
+        text("A HISTÓRIA DOS DIREITOS DAS MULHERES", width/2, this.margem); 
         
 
-        fill(25);
-        textSize(20);
-        textAlign (CENTER, CENTER);
-        text(ourText, 0, height/2+this.margem/2, width, height/2);
-        
+        textSize(14);
+        textAlign (LEFT, CENTER);
+        text(ourText, width/2-textL/2, height/2+this.margem/2, width/2+textL/2, height/2);
+
         this.escala = map (this.numero_alunas, 34000, 212000, height/2-this.margem*2, -height/2+this.margem*2);
 
         ellipseMode(CENTER);
         fill(this.cor);
 
         push();
+        stroke(1);
           translate (0, height/2)
           ellipse(pos, this.pos, this.tamanho);
         pop();
-        
         
       }
       
@@ -56,9 +60,9 @@ class DataElement {
       
       if (device_orientation === "p") 
       {
-        
-        fill(0);
-        textSize(20);
+        noStroke();
+        fill(255);
+        textSize(30);
         textAlign (CENTER, CENTER);
         text("A História dos Direitos das Mulheres", width/2, this.margem); 
         
@@ -67,14 +71,16 @@ class DataElement {
         fill(this.cor);
 
         push();
+        stroke(1);
           translate (width/2, 0)
           ellipse(this.pos, pos, this.tamanho);
         pop();
         
-        fill(25);
-        textSize(12);
-        textAlign (CENTER, CENTER);
-        text(ourText, 0, height/2+this.margem/1.5, width, height/2);
+        noStroke();
+        fill(255);
+        textSize(13);
+        textAlign (LEFT, CENTER);
+        text(ourText, width/2-quadrante*1.5, height/2+this.margem/2, width/2+quadrante, height/2);
         
       }
     }
