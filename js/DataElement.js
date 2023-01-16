@@ -1,36 +1,40 @@
-let ourText = "🔴 1979 | Convenção - Eliminação de Todas as Formas de Discriminação contra as Mulheres (ONU)\n🟠 1993 | Declaração da Eliminação da Violência contra as Mulheres (ONU)\n🟡 1995 | IV Conferência Mundial sobre a Mulher - Declaração de Beijing (China)\n🟢 2000 | Resolução 1325 - Participação Feminina na Prevenção e Resolução de Conflitos (ONU)\n🔵 2015 | Objetivos de Desenvolvimento Sustentável - Igualdade de Género até 2030 (ONU)\n🟣 2017 | 3.5 a 5.5 Milhões de pessoas participam na 'Marcha das Mulheres'";
-
 let textL, textP;
 
+/* Vai buscar os dados das bolasw já delarados */
 class DataElement {
   
-    constructor (ano, numero_alunas, cor) 
+  
+    constructor (ano, numero_alunas, cor, tamanho) 
     {
       this.ano = ano;
       this.numero_alunas = numero_alunas;
       this.cor  = cor;
-      this.tamanho = 20;
-      
+      this.tamanho = tamanho;
       this.pos = 0;
     }
   
-  
+  /* Animação entre o ponto médio e o valor de cada ano */
     animDataElement() 
     {
-      if (this.pos > this.escala) this.pos--;
+      if (this.pos >= this.escala) this.pos--;
       else 
-      if (this.pos < this.escala) this.pos++;
+      if (this.pos <= this.escala) this.pos++;
     }
 
-  
+    /* Desenhar  */
     drawDataElement (pos) 
     {
       this.margem = 150;
       
+      let pvs_scene_btn_x = width/2;
+      let pvs_scene_btn_y = height-10;
+      let pvs_scene_btn_w = 200;
+      let pvs_scene_btn_h = 30;
+      
       if (device_orientation === "l") 
       {      
 
-        textL = 564;
+        textL = 716;
         
         noStroke();
         fill(255);
@@ -39,19 +43,20 @@ class DataElement {
         text("A HISTÓRIA DOS DIREITOS DAS MULHERES", width/2, this.margem); 
         
 
-        textSize(14);
+        textSize(16);
         textAlign (LEFT, CENTER);
-        text(ourText, width/2-textL/2, height/2+this.margem/2, width/2+textL/2, height/2);
+        text(ourText, width/2-textL/2, height-120-100, width/2+textL/2, 120);
 
         this.escala = map (this.numero_alunas, 34000, 212000, height/2-this.margem*2, -height/2+this.margem*2);
+        
+        this.escala2 = map (this.numero_alunas, 34000, 212000, 10, 100);
 
         ellipseMode(CENTER);
         fill(this.cor);
-
         push();
         stroke(1);
           translate (0, height/2)
-          ellipse(pos, this.pos, this.tamanho);
+          ellipse(pos, this.pos, this.escala2);
         pop();
         
       }
@@ -80,13 +85,12 @@ class DataElement {
         fill(255);
         textSize(13);
         textAlign (LEFT, CENTER);
-        text(ourText, width/2-quadrante*1.5, height/2+this.margem/2, width/2+quadrante, height/2);
+        text(ourText, width/2-quadrante*1.5, height-240-10, width/2+quadrante, 240);
         
       }
     }
   
     drawText() 
     {
-      //
     }
 }
